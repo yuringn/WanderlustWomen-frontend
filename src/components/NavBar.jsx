@@ -12,10 +12,13 @@ function NavBar({currentUser, setCurrentUser}){
         <nav>
             {currentUser? (
                <div className="main-menu-button">
-               <NavLink className="button" to="/posts">
-               All Posts
-            </NavLink>
-               <button onClick={logout} className="button">Logout</button>
+                  <NavLink className="button" to="/posts">
+                     All Posts
+                  </NavLink>
+                  <NavLink to="/profile">
+                     Profile
+                  </NavLink>
+                  <button onClick={logout} className="button">Logout</button>
                </div>
             ):(
                <div className="lgn-sgn-button">

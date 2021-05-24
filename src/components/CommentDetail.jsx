@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 
-function CommentDetail({currentUser, user_id, comment, id, content, username, commentdate, updateComment, deleteComment}){
+function CommentDetail({currentUser, user_id, id, content, username, commentdate, updateComment, deleteComment}){
    
     const [newComment, setNewComment] = useState("")
     const [editCommentForm, setEditCommentForm] = useState(false)

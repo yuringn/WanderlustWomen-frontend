@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect} from "react";
 import {Switch, Route} from "react-router-dom";
 import NavBar from "./NavBar"
@@ -7,6 +6,7 @@ import LoginForm from "./LoginForm"
 import SignUpForm from "./SignupForm"
 import PostsContainer from "./PostsContainer"
 import PostDetail from "./PostDetail"
+import Profile from "./Profile"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
@@ -43,6 +43,10 @@ function App() {
        
         <Route exact path="/signup">
           <SignUpForm setCurrentUser = {setCurrentUser}/>  
+        </Route>
+
+        <Route exact path="/profile/">
+          {currentUser ? <Profile currentUser = {currentUser}/> : null } 
         </Route>
 
         <Route exact path="/posts">
