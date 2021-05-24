@@ -1,8 +1,9 @@
 import React,{ useEffect, useState } from "react";
 import {useParams} from 'react-router-dom'
 import CommentDetail from "./CommentDetail"
+import CommentForm from "./CommentForm";
 
-function PostDetail(){
+function PostDetail({currentUser}){
     const [post, setPost] = useState([])
     const [comments, setComments] = useState([])
     const [userPostCount, setUserPostCount] = useState({})
@@ -12,7 +13,7 @@ function PostDetail(){
     useEffect(() => {
         fetch (`http://127.0.0.1:3001/posts/${id}`)
         .then(r => r.json())
-        .then(post => {console.log(post.comments)
+        .then(post => {
                     setPost(post)
                     setComments(post.comments)
                     setUserPostCount(post.user)      
@@ -20,6 +21,7 @@ function PostDetail(){
     },[id])
 
     //--- CRUD COMMENT ---
+
     const addNewComment = (newComment) => {
         const newCommentArr = [...comments, newComment]
         setComments(newCommentArr)
@@ -35,7 +37,6 @@ function PostDetail(){
     }
 
     const deleteComment = (commentId) => {
-        console.log(commentId)
         const removeComment = comments.filter(comment => comment.id !== commentId )
         setComments(removeComment)
     }
@@ -43,14 +44,15 @@ function PostDetail(){
 
     const handleShowComments = () => setShowComments(show=>!show)
     
-    const renderComment = comments.map(comment => 
-        <CommentDetail key={comment.id} {...comment}
+    const sortComments = [...comments].sort((a,b) => (b.id) - (a.id))
+    const renderComment = sortComments.map(comment => 
+        <CommentDetail key={comment.id} {...comment} currentUser={currentUser}
             updateComment = {updateComment} deleteComment = {deleteComment}
         />
     )
     
 
-    const {pictures, title, destination, visit_date, review, likes_count, comments_count } = post
+    const {pictures, title, destination, visit_date, review, likes_count} = post
     const {posts_count, hometown, avatar, username} = userPostCount
     
     return(
@@ -66,12 +68,14 @@ function PostDetail(){
             <p>{review}</p>
 
             <div className="likes-comments">
-                <span>{likes_count} {likes_count > 1 ? "Likes" : "Like"}</span>
+                <button>{likes_count} {likes_count > 1 ? "Likes" : "Like"}</button>
                 &nbsp;&nbsp;&nbsp;
-                <span onClick={handleShowComments}>
-                    {comments_count} {comments_count > 1 ? "Comments" :  "Comment"}
-                    {showComments ? renderComment : null}
-                </span>
+                
+                <button onClick={handleShowComments}>
+                    {comments.length} {comments.length > 1 ? "Comments" :  "Comment"}
+                </button>
+                <CommentForm addNewComment={addNewComment} post={post} currentUser={currentUser} />
+                {showComments ? renderComment : null}
             </div>
             
             {/* <div className="show-comment">

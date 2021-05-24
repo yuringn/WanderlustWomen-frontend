@@ -31,19 +31,18 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar/>
+      <NavBar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Switch>
-
         <Route exact path ="/">
           <Home/>
         </Route>
 
         <Route exact path="/login">
-          <LoginForm /> 
+          <LoginForm setCurrentUser = {setCurrentUser}/> 
         </Route>
        
         <Route exact path="/signup">
-          <SignUpForm />  
+          <SignUpForm setCurrentUser = {setCurrentUser}/>  
         </Route>
 
         <Route exact path="/posts">
@@ -51,7 +50,7 @@ function App() {
         </Route>
 
         <Route exact path="/posts/:id">
-          <PostDetail />
+          {currentUser ? <PostDetail currentUser={currentUser}/> : null}
         </Route>
 
       </Switch>

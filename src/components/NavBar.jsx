@@ -1,7 +1,33 @@
+import React from "react"
+import {NavLink, useHistory} from "react-router-dom"
 
-function NavBar(){
+function NavBar({currentUser, setCurrentUser}){
+    const history = useHistory()
+    const logout=()=>{
+       localStorage.getItem("token")
+       setCurrentUser(null)
+       history.push("/")
+    }
     return(
-        "NavBar"
+        <nav>
+            {currentUser? (
+               <div className="main-menu-button">
+               <NavLink className="button" to="/posts">
+               All Posts
+            </NavLink>
+               <button onClick={logout} className="button">Logout</button>
+               </div>
+            ):(
+               <div className="lgn-sgn-button">
+                  <NavLink className="button" to="/login">
+                     Login
+                  </NavLink>
+                  <NavLink className="button" to="/signup">
+                     Sign Up
+                  </NavLink>
+               </div>
+            )}
+        </nav>
     )
 }
 
