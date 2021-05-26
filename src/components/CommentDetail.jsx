@@ -1,29 +1,29 @@
 import React, {useState} from "react"
 
-function CommentDetail({currentUser, user_id, id, content, username, commentdate, updateComment, deleteComment}){
+function CommentDetail({currentUser, user_id, id, content, username, commentdate, editComment, deleteComment}){
    
     const [newComment, setNewComment] = useState("")
     const [editCommentForm, setEditCommentForm] = useState(false)
 
     const handleEditCommentForm = () => setEditCommentForm(showForm=>!showForm)
 
-    const editComment = (e) => {
+    const handleEditComment = (e) => {
         e.preventDefault()
         setNewComment("")
         
-        fetch(`http://127.0.0.1:3001/comments/${id}`, {
+        fetch(`http://127.0.0.1:3003/comments/${id}`, {
                 method:"PATCH",
                 headers: {"Content-type":"application/json"},
                 body: JSON.stringify({content: newComment})
             })
             .then(r => r.json())
-            .then(comment => {console.log(comment)
-                updateComment(comment)})
-                setEditCommentForm(false)
+            .then(comment => {
+                editComment(comment)})
+            setEditCommentForm(false)
         }
     
     const handleDelete =()=>{
-        fetch(`http://127.0.0.1:3001/comments/${id}`, {
+        fetch(`http://127.0.0.1:3003/comments/${id}`, {
             method:"DELETE"
         })
         deleteComment(id)
@@ -47,7 +47,7 @@ function CommentDetail({currentUser, user_id, id, content, username, commentdate
             <div> */}
                 
                 {editCommentForm ? (
-                    <form className="update-form" onSubmit={editComment}>
+                    <form className="update-form" onSubmit={handleEditComment}>
                         <input 
                             type="text" 
                             id="comment"

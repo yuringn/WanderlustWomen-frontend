@@ -3,12 +3,12 @@ import { useHistory } from "react-router-dom"
 
 function SignupForm({setCurrentUser}){
     const [formData, setFormData] = useState({
-        username : "",
-        email : "",
-        password : "",
-        hometown : "",
-        bio : "", 
-        avatar : ""
+        username: "",
+        email: "",
+        password: "",
+        hometown: "",
+        bio: "", 
+        avatar: ""
     })
     
     const [errors, setErrors] = useState([])
@@ -23,7 +23,7 @@ function SignupForm({setCurrentUser}){
     const handleSubmit=(e)=>{
         e.preventDefault();
         
-        fetch ("http://127.0.0.1:3001/signup",{
+        fetch ("http://127.0.0.1:3003/signup",{
             method: "POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(formData)
@@ -57,6 +57,7 @@ function SignupForm({setCurrentUser}){
                             name="username"
                             value={formData.username}
                             onChange={handleChange}
+                            required
                         />
                 </div>
                 <br/>
@@ -66,6 +67,7 @@ function SignupForm({setCurrentUser}){
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
+                            required
                         />
                 </div>
                 <br/>
@@ -75,6 +77,7 @@ function SignupForm({setCurrentUser}){
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
+                            required
                         />
                 </div>
                 <br/>
@@ -84,6 +87,7 @@ function SignupForm({setCurrentUser}){
                             name="hometown"
                             value={formData.hometown}
                             onChange={handleChange}
+                            required
                         />
                 </div>
                 <br/>
@@ -93,6 +97,7 @@ function SignupForm({setCurrentUser}){
                             name="bio"
                             value={formData.bio}
                             onChange={handleChange}
+                            required
                         />
                 </div>
                 <br/>
@@ -102,6 +107,7 @@ function SignupForm({setCurrentUser}){
                             name="avatar"
                             value={formData.avatar}
                             onChange={handleChange}
+                            required
                         />
                 </div>
                 <br/>

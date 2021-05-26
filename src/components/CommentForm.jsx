@@ -8,7 +8,7 @@ function CommentForm({addNewComment, post, currentUser}){
         setContent("")
         const newComment = {content, post_id: post.id, user_id: currentUser.id}
 
-        fetch("http://127.0.0.1:3001/comments/", {
+        fetch("http://127.0.0.1:3003/comments/", {
             method:"POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(newComment)
@@ -24,7 +24,6 @@ function CommentForm({addNewComment, post, currentUser}){
                 <label htmlFor="comment">Comment: </label>
                 <input 
                 type="text" 
-                id="comment"
                 name="comment"
                 value={content}
                 onChange={(e)=>setContent(e.target.value)}

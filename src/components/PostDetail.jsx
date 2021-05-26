@@ -3,31 +3,96 @@ import {useParams} from 'react-router-dom'
 import CommentDetail from "./CommentDetail"
 import CommentForm from "./CommentForm";
 
-function PostDetail({currentUser}){
+function PostDetail({currentUser, updatePost}){
     const [post, setPost] = useState([])
     const [comments, setComments] = useState([])
     const [userPostCount, setUserPostCount] = useState({})
+    const [likes, setLikes] = useState([])
     const {id} = useParams()
     const [showComments, setShowComments] = useState(false)
+    
+    // ---------- EDIT POST ---------- //
+
+    const [formData, setFormData] = useState({
+        user_id: currentUser.id,
+        country: "",
+        title: "",
+        visit_date: "",
+        review: "",
+        picture:""
+    })
+    const [editPostForm, setEditPostForm] = useState(false)
+
+    const handleEditPostForm = () => setEditPostForm(showForm=>!showForm)
+
+    const handleChange = (e) => {
+        const key = e.target.name
+        setFormData({...formData, 
+        [key]: e.target.value})
+    }
+
+    const handleEditPost = (e) => {
+        e.preventDefault()
+
+        fetch(`http://127.0.0.1:3003/posts/${id}`,{
+            method:"PATCH",
+            headers: {"Content-type":"application/json"},
+            body: JSON.stringify(formData)
+        })
+        .then(r => r.json())
+        .then(post => { console.log(post)
+                        updatePost(post)})
+        setEditPostForm(false)  
+    }
+    
+    // ---------- EDIT POST ---------- //
 
     useEffect(() => {
-        fetch (`http://127.0.0.1:3001/posts/${id}`)
+        fetch (`http://127.0.0.1:3003/posts/${id}`)
         .then(r => r.json())
-        .then(post => {
+        .then(post => {console.log(post.likes)
                     setPost(post)
                     setComments(post.comments)
-                    setUserPostCount(post.user)      
+                    setUserPostCount(post.user)
+                    // setLikes(post.likes.length)      
         })
     },[id])
 
-    //--- CRUD COMMENT ---
+    const addLike = (likeObj) => {
+        console.log(likeObj)
+        const newLike = [...likes, likeObj]
+        setLikes(newLike)
+    }
+
+    const deleteLike = (likeId) => {
+        const removeLike = likes.filter(like => like.id !== likeId)
+        setLikes(removeLike)
+    }
+
+    const handleLike = () => {
+        fetch("http://127.0.0.1:3003/likes", {
+            method:"POST",
+            headers:{"Content-type":"application/json"},
+            body: JSON.stringify({user_id: currentUser.id, post_id: post.id})
+        })
+        .then(r => r.json())
+        .then(like => {
+                        addLike(like)
+                        // setLikes(like => like + 1)
+        })
+    }
+
+   
+
+
+    // ----------  CRUD COMMENT ---------- //
 
     const addNewComment = (newComment) => {
         const newCommentArr = [...comments, newComment]
         setComments(newCommentArr)
     }   
 
-    const updateComment = (commentObj) => {
+    const editComment = (commentObj) => {
        const update =  comments.map(comment => {
            if (comment.id === commentObj.id){
                return commentObj
@@ -40,48 +105,125 @@ function PostDetail({currentUser}){
         const removeComment = comments.filter(comment => comment.id !== commentId )
         setComments(removeComment)
     }
-    //--- CRUD COMMENT ---
+
+     // ----------  CRUD COMMENT ---------- //
 
     const handleShowComments = () => setShowComments(show=>!show)
     
     const sortComments = [...comments].sort((a,b) => (b.id) - (a.id))
     const renderComment = sortComments.map(comment => 
         <CommentDetail key={comment.id} {...comment} currentUser={currentUser}
-            updateComment = {updateComment} deleteComment = {deleteComment}
+            editComment = {editComment} deleteComment = {deleteComment}
         />
     )
     
 
-    const {pictures, title, destination, visit_date, review, likes_count} = post
+    const {picture, title, country, visit_date, review, likes_count, user_id} = post
     const {posts_count, hometown, avatar, username} = userPostCount
     
     return(
-        <div className = "post-details">
-            <img src={pictures} alt={destination}/>
-            <h2>{title}</h2>
-            <h3>{destination}</h3>
-            <h3>Date of visit: {visit_date}</h3>
-            <img className="avatar-in-postDetail"src={avatar} alt={username}/>
-            <h3>{username} </h3>
-            <span role="img" aria-label="hometown">🏡 {hometown}</span><br/>
-            <span role="img" aria-label="contributions"> ✍🏻 {posts_count} {posts_count > 1 ? "Contributions" : "Contribution" } </span>
-            <p>{review}</p>
+        <>
+            <div className = "post-details">
+                <img src={picture} alt={country}/>
+                <h2>{title}</h2>
+                <h3>{country}</h3>
+                <h3>Date of visit: {visit_date}</h3>
+                <img className="avatar-in-postDetail"src={avatar} alt={username}/>
+                <h3>{username} </h3>
+                <span role="img" aria-label="hometown">🏡 {hometown}</span><br/>
+                <span role="img" aria-label="contributions"> ✍🏻 {posts_count} {posts_count > 1 ? "Contributions" : "Contribution" } </span>
+                <p>{review}</p>
 
-            <div className="likes-comments">
-                <button>{likes_count} {likes_count > 1 ? "Likes" : "Like"}</button>
-                &nbsp;&nbsp;&nbsp;
+                <div className="likes-comments">
+                    <button onClick={handleLike}>{likes.length} {likes.length > 1 ? "Likes" : "Like"}</button>
+                    &nbsp;&nbsp;&nbsp;
+                    
+                    <button onClick={handleShowComments}>
+                        {comments.length} {comments.length > 1 ? "Comments" :  "Comment"}
+                    </button>
+                    {user_id === currentUser.id ? <button onClick={handleEditPostForm}>Edit Post</button> : null}
+                    <CommentForm addNewComment={addNewComment} post={post} currentUser={currentUser} />
+                    {showComments ? renderComment : null}
+                </div>
                 
-                <button onClick={handleShowComments}>
-                    {comments.length} {comments.length > 1 ? "Comments" :  "Comment"}
-                </button>
-                <CommentForm addNewComment={addNewComment} post={post} currentUser={currentUser} />
-                {showComments ? renderComment : null}
-            </div>
-            
-            {/* <div className="show-comment">
+                {/* <div className="show-comment">
 
-            </div> */}
-        </div>
+                </div> */}
+            </div>
+
+            <div>
+                {editPostForm ? (
+                    <form onSubmit={handleEditPost}>
+                    <div>
+                        <label htmlFor="country">Country: </label>
+                        <select 
+                            name="country"
+                            value={formData.country}
+                            onChange={handleChange}
+                        >   
+                            <option value="France">France</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Netherlands">Netherlands</option>
+                            <option value="Peru">Peru</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Spain">Spain</option>
+                            <option value="Swiss">Swiss</option>
+                            <option value="USA">USA</option>
+                            <option value="Vietnam">Vietnam</option>
+                            
+                        </select>
+                    </div>
+                    <br/>
+                    <div>
+                        <label htmlFor="title">Title: </label>
+                        <input type="text" 
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
+                            placeholder="Please include city or country in your title"
+                            required
+                        />
+                    </div>
+                    <br/>
+                     <div>
+                        <label htmlFor="visit_date">Visit Date: </label>
+                        <input type="date"
+                            name="visit_date"
+                            value={formData.visit_date}
+                            min="01-01-2015" max ="12-31-2030"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <br/>
+                     <div>
+                        <label htmlFor="review">Review: </label>
+                        <input type="text"
+                            name="review"
+                            value={formData.review}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <br/>
+                     <div>
+                        <label htmlFor="picture">Picture: </label>
+                        <input type="text"
+                            name="picture"
+                            value={formData.picture}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <br/>
+    
+                    <button type="submit">Update Post</button>
+                </form>
+                ): null}
+            </div>
+        </>
     )
 }
 

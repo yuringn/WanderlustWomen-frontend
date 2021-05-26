@@ -1,25 +1,18 @@
 import React, {useState} from "react"
+import UpdateProfileForm from "./UpdateProfileForm"
 
-function Profile({currentUser}){
-    console.log(currentUser)
+function Profile({currentUser, setCurrentUser}){
+    
     const [editProfile, setEditProfile] = useState(false)
-    const [formData, setFormData] = useState({
-        username : currentUser.username,
-        email : currentUser.email,
-        password : currentUser.password,
-        hometown : currentUser.hometown,
-        bio : currentUser.bio,
-        avatar : currentUser.avatar
-    })
-
-    const handleChange =(e)=>{
-        const key = e.target.name
-        setFormData({...formData, 
-        [key]: e.target.value})
-    }
    
+    const handleShowEditProfile =()=> setEditProfile(show=>!show)
     return (
         <main>
+            <button onClick={handleShowEditProfile}>Edit Profile ?</button>
+                {/* {editProfile?  */}
+                <UpdateProfileForm currentUser={currentUser} setCurrentUser={setCurrentUser} setEditProfile={setEditProfile}/>
+                {/* // :null} */}
+            
             <img src ={currentUser.avatar} alt={currentUser.username}></img>
             <p>Username:{currentUser.username}</p>
             <p>Email:{currentUser.email}</p>

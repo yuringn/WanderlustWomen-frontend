@@ -18,6 +18,9 @@ function NavBar({currentUser, setCurrentUser}){
                   <NavLink to="/profile">
                      Profile
                   </NavLink>
+                  <NavLink to="/new-post">
+                     Write a post
+                  </NavLink>
                   <button onClick={logout} className="button">Logout</button>
                </div>
             ):(

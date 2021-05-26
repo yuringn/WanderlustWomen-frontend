@@ -4,12 +4,12 @@ import {useHistory} from "react-router-dom"
 
 function LoginForm ({ setCurrentUser }) {
     const [formData, setFormData] = useState({
-        username : "",
-        email : "",
-        password : "",
-        hometown : "",
-        bio : "", 
-        avatar : ""
+        username: "",
+        email: "",
+        password: "",
+        hometown: "",
+        bio: "", 
+        avatar: ""
     })
     
     const [errors, setErrors] = useState([])
@@ -24,7 +24,7 @@ function LoginForm ({ setCurrentUser }) {
     const handleSubmit=(e)=>{
         e.preventDefault();
         
-        fetch ("http://127.0.0.1:3001/login",{
+        fetch ("http://127.0.0.1:3003/login",{
             method: "POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(formData)
