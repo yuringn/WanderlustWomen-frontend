@@ -50,7 +50,8 @@ function PostDetail({currentUser, updatePost}){
     useEffect(() => {
         fetch (`http://127.0.0.1:3003/posts/${id}`)
         .then(r => r.json())
-        .then(post => {console.log(post)
+        .then(post => {
+                    // console.log(post)
                     setPost(post)
                     setComments(post.comments)
                     setUserPostCount(post.user)
@@ -68,45 +69,6 @@ function PostDetail({currentUser, updatePost}){
     //     const removeLike = currentLikes.filter(like => like.id !== likeId)
     //     setCurrentLikes(removeLike)
     // }
-
-    const handleLike = () => {
-        let currentUserDidLike = currentLikes.filter(like => like.user_id === currentUser.id);
-        console.log("currentUserDidLike",currentUserDidLike)
-        if (currentUserDidLike[0] !== undefined) {
-            let likeToBeRemoved = currentUserDidLike[0].id;
-            deleteLike(likeToBeRemoved);
-        } else {
-            addLike();
-        }
-    }
-    
-    const addLike = () => {
-        console.log("add Like is called")
-        let like = {
-            
-            user_id: currentUser.id,
-            post_id: post.id
-        }
-    
-        fetch("http://127.0.0.1:3003/likes", {
-                method:"POST",
-                headers:{"Content-type":"application/json"},
-                body: JSON.stringify(like)
-            })
-            .then(r => r.json())    
-            .then(data=>{console.log(data)
-                setCurrentLikes(data.post.likes)
-            }
-            
-)}
-
-    const deleteLike = (likeId) => {
-        const removeLike = currentLikes.filter(like => like.id !== likeId)
-        setCurrentLikes(removeLike)
-        fetch(`http://127.0.0.1:3003/likes/${likeId}`, {
-                method:"DELETE",         
-            })
-    }
 
     // const handleLike = () => {
     //     // let currentUserDidLike = currentLikes.filter(like => like.user_id === currentUser.Id)
@@ -126,7 +88,50 @@ function PostDetail({currentUser, updatePost}){
     //                     // setCurrentLikes(like => like + 1)
     //     })
     // }
+    
+    // ----------  HANDLE LIKE/UNLIKE ---------- //
+    const addLike = () => {
+        console.log("add Like is called")
+        let like = {
+            user_id: currentUser.id,
+            post_id: post.id
+        }
+    
+        fetch("http://127.0.0.1:3003/likes", {
+                method:"POST",
+                headers:{"Content-type":"application/json"},
+                body: JSON.stringify(like)
+            })
+            .then(r => r.json())    
+            .then(data=>{
+                console.log(data)
+                setCurrentLikes(data.post.likes)
+            }       
+)}
 
+    const deleteLike = (likeId) => {
+        console.log(likeId)
+        const removeLike = currentLikes.filter(like => like.id !== likeId)
+        setCurrentLikes(removeLike)
+        fetch(`http://127.0.0.1:3003/likes/${likeId}`, {
+                method:"DELETE",         
+            })
+    }
+
+    const handleLike = () => {
+        let currentUserDidLike = currentLikes.filter(like => like.user_id === currentUser.id);
+        console.log("currentUserDidLike",currentUserDidLike[0])
+        if (currentUserDidLike[0] !== undefined) {
+            let likeToBeRemoved = currentUserDidLike[0].id;
+            console.log(likeToBeRemoved)
+            deleteLike(likeToBeRemoved);
+        } else {
+            addLike();
+        }
+    }
+
+    // ----------  HANDLE LIKE/UNLIKE ---------- //
+    
 
     // ----------  CRUD COMMENT ---------- //
 
@@ -160,7 +165,7 @@ function PostDetail({currentUser, updatePost}){
         />
     )
     
-    const {picture, title, country, visit_date, review, likes_count, user_id} = post
+    const {picture, title, country, visit_date, review, user_id} = post
     const {posts_count, hometown, avatar, username} = userPostCount
     
     return(
