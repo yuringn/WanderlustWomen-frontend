@@ -102,7 +102,7 @@ function NewPostForm({currentUser, addNewPost}){
                 </div>
                 <br/>
 
-                <button type="submit">Add Comment</button>
+                <button type="submit">Create Your Post</button>
             </form>
         </div>
     )

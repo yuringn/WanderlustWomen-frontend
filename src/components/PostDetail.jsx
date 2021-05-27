@@ -7,7 +7,7 @@ function PostDetail({currentUser, updatePost}){
     const [post, setPost] = useState([])
     const [comments, setComments] = useState([])
     const [userPostCount, setUserPostCount] = useState({})
-    const [likes, setLikes] = useState([])
+    const [currentLikes, setCurrentLikes] = useState([])
     const {id} = useParams()
     const [showComments, setShowComments] = useState(false)
     
@@ -50,26 +50,27 @@ function PostDetail({currentUser, updatePost}){
     useEffect(() => {
         fetch (`http://127.0.0.1:3003/posts/${id}`)
         .then(r => r.json())
-        .then(post => {console.log(post.likes)
+        .then(post => {console.log(post)
                     setPost(post)
                     setComments(post.comments)
                     setUserPostCount(post.user)
-                    // setLikes(post.likes.length)      
+                    // setCurrentLikes(post.likes.length)      
         })
     },[id])
 
     const addLike = (likeObj) => {
         console.log(likeObj)
-        const newLike = [...likes, likeObj]
-        setLikes(newLike)
+        const newLike = [...currentLikes, likeObj]
+        setCurrentLikes(newLike)
     }
 
     const deleteLike = (likeId) => {
-        const removeLike = likes.filter(like => like.id !== likeId)
-        setLikes(removeLike)
+        const removeLike = currentLikes.filter(like => like.id !== likeId)
+        setCurrentLikes(removeLike)
     }
 
     const handleLike = () => {
+        // if ()
         fetch("http://127.0.0.1:3003/likes", {
             method:"POST",
             headers:{"Content-type":"application/json"},
@@ -78,7 +79,7 @@ function PostDetail({currentUser, updatePost}){
         .then(r => r.json())
         .then(like => {
                         addLike(like)
-                        // setLikes(like => like + 1)
+                        // setCurrentLikes(like => like + 1)
         })
     }
 
@@ -117,8 +118,8 @@ function PostDetail({currentUser, updatePost}){
         />
     )
     
-
-    const {picture, title, country, visit_date, review, likes_count, user_id} = post
+    // , likes=post.likes.map(like=>({user_id:like.user_id}))
+    const {picture, title, country, visit_date, review, likes_count, user_id, likes} = post
     const {posts_count, hometown, avatar, username} = userPostCount
     
     return(
@@ -135,7 +136,7 @@ function PostDetail({currentUser, updatePost}){
                 <p>{review}</p>
 
                 <div className="likes-comments">
-                    <button onClick={handleLike}>{likes.length} {likes.length > 1 ? "Likes" : "Like"}</button>
+                    <button onClick={handleLike}>{likes_count} {likes_count > 1 ? "Likes" : "Like"}</button>
                     &nbsp;&nbsp;&nbsp;
                     
                     <button onClick={handleShowComments}>

@@ -31,7 +31,7 @@ function App() {
     .then (user => setCurrentUser(user))
   },[])
 
-// --- ADD NEW POST --- //
+// ---------- ADD NEW POST ----------  //
   useEffect(()=>{
     fetch("http://127.0.0.1:3003/posts")
     .then(r=>r.json())
@@ -51,7 +51,7 @@ function App() {
     })
     setPosts(update)
   }
-// --- ADD NEW POST --- //
+// ----------  ADD NEW POST ----------  //
   
   return (
     <div className="App">
