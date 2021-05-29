@@ -1,26 +1,46 @@
 import React,{ useEffect, useState } from "react";
-import {useParams} from 'react-router-dom'
+import {useParams,useHistory} from 'react-router-dom'
 import CommentDetail from "./CommentDetail"
 import CommentForm from "./CommentForm";
 
-function PostDetail({currentUser, updatePost}){
-    const [post, setPost] = useState({})
+function PostDetail({currentUser, deletePost}){
+    const [post, setPost] = useState([])
     const [comments, setComments] = useState([])
     const [userPostCount, setUserPostCount] = useState({})
     const [currentLikes, setCurrentLikes] = useState([])
     const {id} = useParams()
+    const history = useHistory()
     const [showComments, setShowComments] = useState(false)
-    
-    // ---------- EDIT POST ---------- //
-
     const [formData, setFormData] = useState({
         user_id: currentUser.id,
         country: "",
         title: "",
         visit_date: "",
         review: "",
-        picture:""
+        picture: ""
     })
+
+    useEffect(() => {
+        fetch (`http://127.0.0.1:3003/posts/${id}`)
+        .then(r => r.json())
+        .then(post => {
+                    // console.log(post)
+                    setPost(post)
+                    setComments(post.comments)
+                    setUserPostCount(post.user)
+                    setCurrentLikes(post.likes) 
+                    setFormData(post)     
+        })
+    },[id])
+
+    
+    // ---------- EDIT POST ---------- //
+
+    const editPost = (editPostObj) => {
+        console.log( editPostObj)
+        setPost(editPostObj)
+      }
+
     const [editPostForm, setEditPostForm] = useState(false)
 
     const handleEditPostForm = () => setEditPostForm(showForm=>!showForm)
@@ -41,24 +61,20 @@ function PostDetail({currentUser, updatePost}){
         })
         .then(r => r.json())
         .then(post => { console.log(post)
-                        updatePost(post)})
+                        editPost(post)})
         setEditPostForm(false)  
     }
     
+    const handleDeletePost =()=>{
+        fetch(`http://127.0.0.1:3003/posts/${id}`, {
+            method:"DELETE"
+        })
+        history.push("/posts")
+        deletePost(id)
+    }
     // ---------- EDIT POST ---------- //
 
-    useEffect(() => {
-        fetch (`http://127.0.0.1:3003/posts/${id}`)
-        .then(r => r.json())
-        .then(post => {
-                    // console.log(post)
-                    setPost(post)
-                    setComments(post.comments)
-                    setUserPostCount(post.user)
-                    setCurrentLikes(post.likes)      
-        })
-    },[id])
-
+   
     // const addLike = (likeObj) => {
     //     console.log(likeObj)
     //     const newLike = [...currentLikes, likeObj]
@@ -189,6 +205,7 @@ function PostDetail({currentUser, updatePost}){
                         {comments.length} {comments.length > 1 ? "Comments" :  "Comment"}
                     </button>
                     {user_id === currentUser.id ? <button onClick={handleEditPostForm}>Edit Post</button> : null}
+                    {user_id === currentUser.id ? <button onClick={handleDeletePost}>Delete Post</button> : null}
                     <CommentForm addNewComment={addNewComment} post={post} currentUser={currentUser} />
                     {showComments ? renderComment : null}
                 </div>

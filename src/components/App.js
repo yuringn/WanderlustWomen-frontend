@@ -12,7 +12,6 @@ import Profile from "./Profile"
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [posts, setPosts] = useState([])
-  
 
   useEffect(()=>{
     const token = localStorage.getItem("token")
@@ -31,7 +30,7 @@ function App() {
     .then (user => setCurrentUser(user))
   },[])
 
-// ---------- ADD NEW POST ----------  //
+// ---------- ADD/DELETE NEW POST ----------  //
   useEffect(()=>{
     fetch("http://127.0.0.1:3003/posts")
     .then(r=>r.json())
@@ -43,15 +42,21 @@ function App() {
     setPosts(newPostArr)
   }
 
-  const updatePost = (postObj) => {
-    const update = posts.map(post => {
-      if (post.id === postObj.id){
-        return postObj
-      }else return post
-    })
-    setPosts(update)
+  // const editPost = (editPostObj) => {
+  //   console.log( editPostObj)
+  //   const postUpdate = posts.map(post => {
+  //     if (post.id === editPostObj.id){
+  //       return editPostObj
+  //     }else return post
+  //   })
+  //   setPosts(postUpdate)
+  // }
+
+  const deletePost = (postId) => {
+    const removePost = posts.filter(post => post.id!==postId)
+    setPosts(removePost)
   }
-// ----------  ADD NEW POST ----------  //
+// ----------  ADD/ DELETE NEW POST ----------  //
   
   return (
     <div className="App">
@@ -70,7 +75,7 @@ function App() {
         </Route>
 
         <Route exact path="/profile/">
-          {currentUser ? <Profile currentUser = {currentUser} setCurrentUser={setCurrentUser}/> : null } 
+          {currentUser && <Profile currentUser = {currentUser} setCurrentUser={setCurrentUser}/> } 
         </Route>
 
         <Route exact path="/posts">
@@ -78,12 +83,14 @@ function App() {
         </Route>
 
         <Route exact path="/posts/:id">
-          {currentUser ? <PostDetail currentUser={currentUser}
-          updatePost={updatePost}/> : null}
+          {currentUser && <PostDetail currentUser={currentUser}
+          // editPost={editPost} 
+          deletePost={deletePost}
+          /> }
         </Route>
         
         <Route exact path="/new-post">
-          {currentUser ? <NewPostForm currentUser={currentUser} addNewPost={addNewPost} /> : null}
+          {currentUser && <NewPostForm currentUser={currentUser} addNewPost={addNewPost} /> }
         </Route>
 
       </Switch>
