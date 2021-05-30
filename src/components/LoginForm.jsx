@@ -49,22 +49,26 @@ function LoginForm ({ setCurrentUser }) {
     }
 
     return (
-        <section>
+        <section className="login-signup-container">
             <form onSubmit={handleSubmit} className="login-box">
-                <h2>Login</h2>
+                <h1 className="h1-login">Login</h1>
                 <div>
-                    <label className="label1">User Name: </label>
-                        <input type="text"
+                    <label className="label-login-signup" htmlFor="username">User Name </label>
+                        <br/>
+                        <input className="for-login-signup" type="text"
                             name="username"
+                            placeholder="Enter Username"
                             value={formData.username}
                             onChange={handleChange}
                         />
                 </div>
                 <br/>
                 <div>
-                    <label className="label2">Password: </label>
-                        <input type="password"
+                    <label className="label-login-signup" htmlFor="psw">Password </label>
+                    <br/>
+                        <input className="for-login-signup" type="password"
                             name="password"
+                            placeholder="Enter Password"
                             value={formData.password}
                             onChange={handleChange}
                         />
@@ -72,7 +76,7 @@ function LoginForm ({ setCurrentUser }) {
                 <br/>
                 {errors.map(error=><h3 style={{color:"black"}} key={error}>{error}</h3>)}
                 <br/>
-                <button type="submit">Login</button>
+                <button className="button-login-signup"type="submit">Login</button>
             </form>
         </section>
     )

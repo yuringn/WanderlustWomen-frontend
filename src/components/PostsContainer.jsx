@@ -28,11 +28,11 @@ function PostsContainer(){
                                 .filter(post=>post.country.toLowerCase().includes(searchPost.toLowerCase()))
                                 .map(post => <PostCard key={post.id} {...post}/>)
     return (
-        <div>
+        <section>
             <Search searchPost={searchPost} setSearchPost={setSearchPost}/>
             {/* <FilterPosts setFilterAllPosts={setFilterAllPosts}/> */}
-            {postCard}
-        </div>
+            <ul className="post-container-card">{postCard}</ul>
+        </section>
         )
 }
 export default PostsContainer

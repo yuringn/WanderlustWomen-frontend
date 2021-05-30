@@ -12,6 +12,130 @@ code {
     monospace;
 }
 
+.logo {
+  width:250px;
+  height:250px;
+  padding-right:100px
+}
+
+.search-bar{
+  margin-top: 30px;
+}
+/******* ALL POSTS *******/
+
+.post-container-card{
+  list-style:none;
+  text-align: center;
+  padding-left:100px
+ }
+
+.post-card{
+  margin: 2rem;
+}
+
+.post-card-image{
+  width: 100%;
+  height: 18rem;
+}
+
+.post-card-image:hover{
+  opacity: 1;
+	-webkit-animation: flash 2s;
+	animation: flash 2s;
+}
+@-webkit-keyframes flash {
+	0% {
+		opacity: .4;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes flash {
+	0% {
+		opacity: .4;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@media (min-width: 768px) {
+  .post-container-card {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .post-card {
+    width: calc(33% - 2rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .post-card {
+    width: calc(25% - 2rem);
+  }
+}
+
+@media (min-width: 1200px) {
+  .post-card {
+    width: calc(20% - 2rem);
+  }
+}
+
+.post-card-title {
+  width:100%;
+  height:70px;
+}
+.post-card-total-like{
+  width:100%;
+  margin-top: 10px;
+}
+
+.button-viewmore {
+  align-items: center;
+  border-radius: 4px;
+  background-color: #e7c7b7;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  padding: 12px;
+  width: 130px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.button-viewmore span{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button-viewmore span:after{
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button-viewmore:hover span{
+  padding-right: 25px;
+}
+
+.button-viewmore:hover span:after{
+  opacity: 1;
+  right: 0;
+}
+
+/******* ALL POSTS *******/
+
 .avatar-in-postDetail{
   vertical-align: middle;
   width: 50px;
@@ -19,12 +143,53 @@ code {
   border-radius: 50%;
 }
 
-.logo {
-  width:150px;
-  height:150px
+/******* LOGIN/SIGNUP FORM *******/
+.h1-login{
+  color: #e7c7b7;
+  font-size: 2rem;
+  padding: 20px 125px;
+}
+.h1-login-signup {
+  color: #e7c7b7;
+  font-size: 2rem;
+  padding: 20px 110px;
+}
+.h1-signup + p{
+  padding-bottom: 20px;
+}
+.login-signup-container {
+  /* text-align: center; */
+  
+  height: 85vh;
+  margin: 0 33rem;
+  width:80%
+}
+/* .label-login-signup{
+  padding-right: 20rem;
+} */
+.for-login-signup{
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
-.logo2{
-  width:300px;
-  height:300px
+.button-login-signup{
+  background-color: #e7c7b7;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  font-size: 16px;
+  font-weight: bold;
 }
+
+.button-login-signup:hover{
+  opacity: 0.7;
+}
+
+/******* LOGIN/SIGNUP FORM *******/

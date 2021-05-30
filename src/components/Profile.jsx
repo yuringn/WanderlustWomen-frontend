@@ -8,16 +8,15 @@ function Profile({currentUser, setCurrentUser}){
     const handleShowEditProfile =()=> setEditProfile(show=>!show)
     return (
         <main>
-            <button onClick={handleShowEditProfile}>Edit Profile ?</button>
-                {/* {editProfile?  */}
-                <UpdateProfileForm currentUser={currentUser} setCurrentUser={setCurrentUser} setEditProfile={setEditProfile}/>
-                {/* // :null} */}
-            
             <img src ={currentUser.avatar} alt={currentUser.username}></img>
             <p>Username:{currentUser.username}</p>
             <p>Email:{currentUser.email}</p>
             <p>Hometown: {currentUser.hometown}</p>
             <p>Bio: {currentUser.bio}</p>
+            <button onClick={handleShowEditProfile}>Edit Profile ?</button>
+            {/* {editProfile?  */}
+            <UpdateProfileForm currentUser={currentUser} setCurrentUser={setCurrentUser} setEditProfile={setEditProfile}/>
+                {/* // :null} */}
         </main>
     )
 }
