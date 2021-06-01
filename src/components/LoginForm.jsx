@@ -49,13 +49,14 @@ function LoginForm ({ setCurrentUser }) {
     }
 
     return (
-        <section className="login-signup-container">
+        <>
+        <h1 className="h1-login">Login</h1>
+        <section className="all-form">
             <form onSubmit={handleSubmit} className="login-box">
-                <h1 className="h1-login">Login</h1>
                 <div>
                     <label className="label-login-signup" htmlFor="username">User Name </label>
                         <br/>
-                        <input className="for-login-signup" type="text"
+                        <input className="all-form-input" type="text"
                             name="username"
                             placeholder="Enter Username"
                             value={formData.username}
@@ -66,7 +67,7 @@ function LoginForm ({ setCurrentUser }) {
                 <div>
                     <label className="label-login-signup" htmlFor="psw">Password </label>
                     <br/>
-                        <input className="for-login-signup" type="password"
+                        <input className="all-form-input"  type="password"
                             name="password"
                             placeholder="Enter Password"
                             value={formData.password}
@@ -79,6 +80,7 @@ function LoginForm ({ setCurrentUser }) {
                 <button className="button-login-signup"type="submit">Login</button>
             </form>
         </section>
+        </>
     )
 }
 

@@ -48,13 +48,14 @@ function SignupForm({setCurrentUser}){
     }
 
     return (
-        <section className="login-signup-container">
-            <form onSubmit={handleSubmit} className="signup-box">
-                <h1 className="h1-signup">Signup</h1>
-                <p>Please fill in this form to create an account.</p>
+        <>
+        <h1 className="h1-signup">Signup</h1>
+        <p className="p-signup">Please fill in this form to create an account.</p>
+        <section className="all-form">
+            <form onSubmit={handleSubmit}>
                 <div>
-                    <label className="label-login-signup" htmlFor="username">User Name </label><br/>
-                        <input className="for-login-signup"  type="text"
+                    <label className="all-form-label" htmlFor="username">User Name </label><br/>
+                        <input className="all-form-input"  type="text"
                             name="username"
                             value={formData.username}
                             onChange={handleChange}
@@ -65,7 +66,7 @@ function SignupForm({setCurrentUser}){
                 <br/>
                 <div>
                     <label className="label-login-signup"  htmlFor="email">Email </label><br/>
-                        <input className="for-login-signup" type="text"
+                        <input className="all-form-input"  type="text"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
@@ -76,7 +77,7 @@ function SignupForm({setCurrentUser}){
                 <br/>
                 <div>
                     <label className="label-login-signup"  htmlFor="psw">Password </label><br/>
-                        <input className="for-login-signup" type="password"
+                        <input className="all-form-input"  type="password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
@@ -87,7 +88,7 @@ function SignupForm({setCurrentUser}){
                 <br/>
                 <div>
                     <label className="label-login-signup"  htmlFor="hometown">Hometown </label><br/>
-                        <input className="for-login-signup" type="text"
+                        <input className="all-form-input"  type="text"
                             name="hometown"
                             value={formData.hometown}
                             onChange={handleChange}
@@ -98,7 +99,7 @@ function SignupForm({setCurrentUser}){
                 <br/>
                 <div>
                     <label className="label-login-signup"  htmlFor="bio">Bio </label><br/>
-                        <input className="for-login-signup"  type="text"
+                        <input className="all-form-input"   type="text"
                             name="bio"
                             value={formData.bio}
                             onChange={handleChange}
@@ -109,7 +110,7 @@ function SignupForm({setCurrentUser}){
                 <br/>
                 <div>
                     <label className="label-login-signup"  htmlFor="avatar">Avatar </label><br/>
-                        <input className="for-login-signup" type="text"
+                        <input className="all-form-input"  type="text"
                             name="avatar"
                             value={formData.avatar}
                             onChange={handleChange}
@@ -123,6 +124,7 @@ function SignupForm({setCurrentUser}){
                 <button className="button-login-signup"type="submit">Sign Up</button>
             </form>
         </section>
+        </>
     )
 }
 

@@ -38,12 +38,13 @@ function NewPostForm({currentUser, addNewPost}){
     }
 
     return (
-         <div className="newpost-form">
-            <h3>Write a post:</h3>
+        <>
+         <h1 className="h1-write-post">Write a post</h1>
+         <div className="all-form">
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="country">Country: </label>
-                    <select 
+                    <label htmlFor="country">Country: </label><br/>
+                    <select className="all-form-input"
                         name="country"
                         value={formData.country}
                         onChange={handleChange}
@@ -60,14 +61,13 @@ function NewPostForm({currentUser, addNewPost}){
                         <option value="Spain">Spain</option>
                         <option value="Swiss">Swiss</option>
                         <option value="USA">USA</option>
-                        <option value="Vietnam">Vietnam</option>
-                        
+                        <option value="Vietnam">Vietnam</option>  
                     </select>
                 </div>
                 <br/>
                 <div>
-                    <label htmlFor="title">Title: </label>
-                    <input type="text" 
+                    <label htmlFor="title">Title: </label><br/>
+                    <input className="all-form-input" type="text" 
                         name="title"
                         value={formData.title}
                         onChange={handleChange}
@@ -77,8 +77,8 @@ function NewPostForm({currentUser, addNewPost}){
                 </div>
                 <br/>
                  <div>
-                    <label htmlFor="visit_date">Visit Date: </label>
-                    <input type="date"
+                    <label htmlFor="visit_date">Visit Date: </label><br/>
+                    <input className="all-form-input" type="date"
                         name="visit_date"
                         value={formData.visit_date}
                         min="01-01-2015" max = {maxDate}
@@ -87,29 +87,32 @@ function NewPostForm({currentUser, addNewPost}){
                 </div>
                 <br/>
                  <div>
-                    <label htmlFor="review">Review: </label>
-                    <input type="text"
+                    <label htmlFor="review">Review: </label><br/>
+                    <textarea className="all-form-input review" type="text"
                         name="review"
                         value={formData.review}
                         onChange={handleChange}
+                        placeholder="Write something..."
                         required
                     />
                 </div>
                 <br/>
                  <div>
-                    <label htmlFor="picture">Picture: </label>
-                    <input type="text"
+                    <label htmlFor="picture">Picture: </label><br/>
+                    <input className="all-form-input" type="text"
                         name="picture"
                         value={formData.picture}
                         onChange={handleChange}
+                        placeholder="Enter Picture Url"
                         required
                     />
                 </div>
                 <br/>
 
-                <button type="submit">Submit</button>
+                <button className="button-login-signup"type="submit">Submit</button>
             </form>
         </div>
+        </>
     )
 }
 

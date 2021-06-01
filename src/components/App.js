@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {Switch, Route} from "react-router-dom";
 import NavBar from "./NavBar"
 import NewPostForm from "./NewPostForm"

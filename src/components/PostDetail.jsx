@@ -10,7 +10,7 @@ function PostDetail({currentUser, deletePost}){
     const [currentLikes, setCurrentLikes] = useState([])
     const {id} = useParams()
     const history = useHistory()
-    const [showComments, setShowComments] = useState(false)
+    // const [showComments, setShowComments] = useState(false)
     const [formData, setFormData] = useState({
         user_id: currentUser.id,
         country: "",
@@ -24,7 +24,6 @@ function PostDetail({currentUser, deletePost}){
         fetch (`http://127.0.0.1:3003/posts/${id}`)
         .then(r => r.json())
         .then(post => {
-                    // console.log(post)
                     setPost(post)
                     setComments(post.comments)
                     setUserPostCount(post.user)
@@ -172,7 +171,7 @@ function PostDetail({currentUser, deletePost}){
 
      // ----------  CRUD COMMENT ---------- //
 
-    const handleShowComments = () => setShowComments(show=>!show)
+    // const handleShowComments = () => setShowComments(show=>!show)
     
     const sortComments = [...comments].sort((a,b) => (b.id) - (a.id))
     const renderComment = sortComments.map(comment => 
@@ -201,13 +200,14 @@ function PostDetail({currentUser, deletePost}){
                     <button onClick={handleLike}>{currentLikes.length} {currentLikes.length > 1 ? "Likes" : "Like"}</button>
                     &nbsp;&nbsp;&nbsp;
                     
-                    <button onClick={handleShowComments}>
+                    <button >
+                    {/* onClick={handleShowComments} */}
                         {comments.length} {comments.length > 1 ? "Comments" :  "Comment"}
                     </button>
                     {user_id === currentUser.id ? <button onClick={handleEditPostForm}>Edit Post</button> : null}
                     {user_id === currentUser.id ? <button onClick={handleDeletePost}>Delete Post</button> : null}
                     <CommentForm addNewComment={addNewComment} post={post} currentUser={currentUser} />
-                    {showComments ? renderComment : null}
+                    {renderComment}
                 </div>
                 
                 {/* <div className="show-comment">

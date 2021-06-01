@@ -12,10 +12,17 @@ code {
     monospace;
 }
 
+.d-block{
+  text-align: center;
+  margin-left: 27rem;
+  padding-top: 100px;
+  width: 40%
+}
+
 .logo {
   width:250px;
   height:250px;
-  padding-right:100px
+  margin-right: 200px;
 }
 
 /******* SEARCH *******/
@@ -151,6 +158,9 @@ code {
 .post-card-title {
   width:100%;
   height:70px;
+  color:#e7c7b7;
+  font-weight: bold;
+  text-shadow: 0.3px 0.3px #e7c7b7;
 }
 .post-card-total-like{
   width:100%;
@@ -201,34 +211,38 @@ code {
 
 /******* ALL POSTS *******/
 
-/******* LOGIN/SIGNUP FORM *******/
-.h1-login{
+/******* ALL FORM *******/
+
+.h1-login, .h1-signup, .h1-write-post, .h1-profile{
   color: #e7c7b7;
   font-size: 2rem;
-  padding: 20px 125px;
+  padding: 20px;
+  text-align: center;
 }
 
-.h1-signup {
-  color: #e7c7b7;
-  font-size: 2rem;
-  padding: 20px 110px;
-}
-.h1-signup + p{
+.p-signup{
+  text-align: center;
   padding-bottom: 30px;
+  color: grey;
+  text-shadow: 0.2px 0.2px grey;
 }
-.login-signup-container { 
+.all-form { 
   height: 85vh;
   margin: 0 33rem;
-  width:80%
+  width:90%
 }
 
-.for-login-signup{
+.all-form-input{
   width: 30%;
-  padding: 12px 20px;
+  padding: 12px 8px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+}
+
+.review{
+  height: 100px;
 }
 
 .button-login-signup{
@@ -247,8 +261,63 @@ code {
   opacity: 0.7;
 }
 
-/******* LOGIN/SIGNUP FORM *******/
+/******* ALL FORM *******/
 
+/******* PROFILE *******/
+
+.h1-profile{
+  text-align: center;
+  padding-top: 20px;
+}
+/* .profile-card{
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  
+  font-family: arial; 
+  text-align: center;
+  position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+} */
+
+.profile-cover{
+  position: relative;
+  width: 100%;
+  height: 900%;
+  /* background: rgba(0, 0, 255, 0.2); */
+  /* z-index: -1; */
+}
+.profile-container{
+  width: 400px;
+  height: 450px;
+  background-color: #fff8f4;
+  margin: 30px auto;
+  border-radius: 12px;
+  /* overflow: hidden; */
+}
+
+div.middle{
+  position:relative;
+  text-align: center;
+  top: 40px;
+}
+
+.profile-image{
+  width:150px;
+  height: 150px;
+  border-radius: 80%; 
+  border: 5px solid rgba(255,255,255,1);
+}
+
+/******* PROFILE *******/
 .avatar-in-postDetail{
   vertical-align: middle;
   width: 50px;
