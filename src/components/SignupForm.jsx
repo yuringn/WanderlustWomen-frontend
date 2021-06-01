@@ -118,7 +118,7 @@ function SignupForm({setCurrentUser}){
                         />
                 </div>
                 <br/>
-                {errors.map(error=><h3 style={{color:"black"}} key={error}>{error}</h3>)}
+                {errors.map(error=><h3 style={{color:"black"}} key={error}>{error +" !"}</h3>)}
                 <br/>
                 <button className="button-login-signup"type="submit">Sign Up</button>
             </form>

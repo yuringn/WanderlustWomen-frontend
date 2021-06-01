@@ -2,7 +2,11 @@ import React, {useState} from "react"
 import {useHistory} from "react-router-dom"
 
 function NewPostForm({currentUser, addNewPost}){
-    
+    let todaysDate = new Date()
+    let year = todaysDate.getFullYear()
+    let month = ("0" + (todaysDate.getMonth() + 1)).slice(-2);  // MM
+    let day = ("0" + todaysDate.getDate()).slice(-2);
+    let maxDate = (year + "/" + month + "/" + day)
     const history = useHistory()
     const [formData, setFormData] = useState({
         user_id: currentUser.id,
@@ -27,7 +31,7 @@ function NewPostForm({currentUser, addNewPost}){
             body: JSON.stringify(formData)
         })
         .then (r => r.json())
-        .then(newPost => {console.log(newPost)
+        .then(newPost => {
                         addNewPost(newPost)
                         history.push("/posts")
         })
@@ -44,6 +48,7 @@ function NewPostForm({currentUser, addNewPost}){
                         value={formData.country}
                         onChange={handleChange}
                     >   
+                        <option value="Select a Country">Select A Country</option>
                         <option value="France">France</option>
                         <option value="Georgia">Georgia</option>
                         <option value="Germany">Germany</option>
@@ -76,7 +81,7 @@ function NewPostForm({currentUser, addNewPost}){
                     <input type="date"
                         name="visit_date"
                         value={formData.visit_date}
-                        min="01-01-2015" max ="12-31-2030"
+                        min="01-01-2015" max = {maxDate}
                         onChange={handleChange}
                     />
                 </div>
@@ -102,7 +107,7 @@ function NewPostForm({currentUser, addNewPost}){
                 </div>
                 <br/>
 
-                <button type="submit">Create Your Post</button>
+                <button type="submit">Submit</button>
             </form>
         </div>
     )

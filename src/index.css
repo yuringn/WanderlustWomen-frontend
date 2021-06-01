@@ -18,9 +18,74 @@ code {
   padding-right:100px
 }
 
-.search-bar{
-  margin-top: 30px;
+/******* SEARCH *******/
+
+.flex-box {
+  background: #e7c7b7;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.search {
+  margin: 20px;
+}
+
+.search > div {
+  display: inline-block;
+  position: relative;
+  filter: white;
+}
+
+.search > div:after {
+  content: "";
+  background: white;
+  width: 4px;
+  height: 20px;
+  position: absolute;
+  top: 40px;
+  right: 2px;
+  transform: rotate(135deg);
+}
+
+.search > div > input {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  background: transparent;
+  width: 25px;
+  height: 25px;
+  padding: 10px;
+  border: solid 3px white;
+  outline: none;
+  border-radius: 35px;
+  transition: width 0.5s;
+}
+
+.search > div > input::placeholder {
+  color: #efefef;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.search > div > input:focus::placeholder {
+  opacity: 1;
+}
+
+.search > div > input:focus,
+.search > div > input:not(:placeholder-shown) {
+  width: 300px;
+}
+
+.incase-nopost{
+  color:#e7c7b7;
+  text-align: center;
+  padding-top: 30px;
+}
+/******* SEARCH *******/
+
 /******* ALL POSTS *******/
 
 .post-container-card{
@@ -136,37 +201,27 @@ code {
 
 /******* ALL POSTS *******/
 
-.avatar-in-postDetail{
-  vertical-align: middle;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
 /******* LOGIN/SIGNUP FORM *******/
 .h1-login{
   color: #e7c7b7;
   font-size: 2rem;
   padding: 20px 125px;
 }
-.h1-login-signup {
+
+.h1-signup {
   color: #e7c7b7;
   font-size: 2rem;
   padding: 20px 110px;
 }
 .h1-signup + p{
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
-.login-signup-container {
-  /* text-align: center; */
-  
+.login-signup-container { 
   height: 85vh;
   margin: 0 33rem;
   width:80%
 }
-/* .label-login-signup{
-  padding-right: 20rem;
-} */
+
 .for-login-signup{
   width: 30%;
   padding: 12px 20px;
@@ -193,3 +248,10 @@ code {
 }
 
 /******* LOGIN/SIGNUP FORM *******/
+
+.avatar-in-postDetail{
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
