@@ -15,13 +15,13 @@ code {
 .d-block{
   text-align: center;
   margin-left: 27rem;
-  padding-top: 100px;
+  padding: 100px;
   width: 40%
 }
 
 .logo {
-  width:250px;
-  height:250px;
+  width:220px;
+  height:220px;
   margin-right: 200px;
 }
 
@@ -52,8 +52,7 @@ code {
   width: 4px;
   height: 20px;
   position: absolute;
-  top: 40px;
-  right: 2px;
+  top: 28px;
   transform: rotate(135deg);
 }
 
@@ -62,13 +61,14 @@ code {
   font-weight: bold;
   font-size: 20px;
   background: transparent;
-  width: 25px;
-  height: 25px;
-  padding: 10px;
+  width: 30px;
+  height: 30px;
+  padding: 15px;
   border: solid 3px white;
   outline: none;
   border-radius: 35px;
   transition: width 0.5s;
+  cursor: pointer;
 }
 
 .search > div > input::placeholder {
@@ -98,7 +98,8 @@ code {
 .post-container-card{
   list-style:none;
   text-align: center;
-  padding-left:100px
+  padding-left:120px;
+  margin-top:40px;
  }
 
 .post-card{
@@ -159,8 +160,9 @@ code {
   width:100%;
   height:70px;
   color:#e7c7b7;
-  font-weight: bold;
   text-shadow: 0.3px 0.3px #e7c7b7;
+  margin-bottom: 50px;
+  margin-top:20px;
 }
 .post-card-total-like{
   width:100%;
@@ -213,10 +215,10 @@ code {
 
 /******* ALL FORM *******/
 
-.h1-login, .h1-signup, .h1-write-post, .h1-profile{
+.all-h1, .h1-profile{
   color: #e7c7b7;
   font-size: 2rem;
-  padding: 20px;
+  padding: 40px;
   text-align: center;
 }
 
@@ -228,7 +230,7 @@ code {
 }
 .all-form { 
   height: 85vh;
-  margin: 0 33rem;
+  margin: 0 33rem; 
   width:90%
 }
 
@@ -242,10 +244,10 @@ code {
 }
 
 .review{
-  height: 100px;
+  height: 200px;
 }
 
-.button-login-signup{
+.allform-button{
   background-color: #e7c7b7;
   color: white;
   padding: 14px 20px;
@@ -264,29 +266,31 @@ code {
 /******* ALL FORM *******/
 
 /******* PROFILE *******/
+.header i {
+  font-size: 25px;
+  color: #d1ac9b;
+  padding: 10px;
+  margin-top:5px;
+}
+
+.edit-icon{
+  float: left;
+  margin-left:10px;
+}
+.edit-icon:hover{
+  cursor: pointer;
+  opacity: 0.7;
+}
 
 .h1-profile{
   text-align: center;
-  padding-top: 20px;
-}
-/* .profile-card{
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  margin: auto;
+  padding-top: 50px;
+  padding-bottom: 30px;
   
-  font-family: arial; 
-  text-align: center;
-  position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
-} */
+}
+.user-name{
+padding-bottom: 10px;
+}
 
 .profile-cover{
   position: relative;
@@ -297,7 +301,7 @@ code {
 }
 .profile-container{
   width: 400px;
-  height: 450px;
+  height: 500px;
   background-color: #fff8f4;
   margin: 30px auto;
   border-radius: 12px;
@@ -315,12 +319,70 @@ div.middle{
   height: 150px;
   border-radius: 80%; 
   border: 5px solid rgba(255,255,255,1);
+  margin-bottom: 30px;
+  margin-right: 60px;
+}
+
+div p {
+  color: rgb(143, 140, 140);
+  text-shadow: 0.2px 0.2px rgb(143, 140, 140);
 }
 
 /******* PROFILE *******/
+
+
+/******* POST DETAIL *******/
+
+.post-details-container{
+  display: block;
+}
+
+.post-details{
+  /* border: .25px solid #dedede; 
+  border-radius: 5px; 
+  background-color: #f1efed; */
+  margin: 10px auto;
+  width: 60vw;
+  text-align: center;
+}
+
+.post-details img {
+  display: block;
+  width: 25vw;
+  height: 25vw;
+  margin: 50px auto;
+}
+
+.post-details-info{
+  margin: 15px auto;
+  
+}
+.userinfo{
+  margin: 30px 20px;
+  width: 30vw;
+}
+
+.userinfo span{
+  color:rgb(133, 130, 130);
+  margin-left: 10px;
+}
 .avatar-in-postDetail{
   vertical-align: middle;
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  margin-bottom: 15px;
+  margin-left: 90px;
+  
 }
+
+.username-in-postDetail{
+  margin-left: 90px;
+}
+.review{
+  width: 80%;
+  padding-left: 30rem;
+  margin-top: -150px;
+}
+
+/******* POST DETAIL *******/

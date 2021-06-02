@@ -1,6 +1,8 @@
 import React, {useState} from "react"
+import {useHistory} from "react-router-dom"
 
-function UpdateProfileForm({currentUser, setCurrentUser, setEditProfile}){
+function UpdateProfileForm({currentUser, setCurrentUser}){
+    const history = useHistory()
 // User doesnt need to update everything ⬇️
     const [formData, setFormData] = useState({
         username : currentUser.username,
@@ -28,71 +30,65 @@ function UpdateProfileForm({currentUser, setCurrentUser, setEditProfile}){
             body: JSON.stringify(formData)
         })
         .then(r=>r.json())
-        .then(data => { console.log(data)
-                        setCurrentUser(data)})
-        setEditProfile(false)
+        .then(data => { 
+                        setCurrentUser(data)
+                        history.push("/profile")})
+        
     }
     return (
-        <div>
-            <form onSubmit={handleUpdate}>
-                <h2>Update Account: </h2>
-                <div>
-                    <label htmlFor="username">Username</label>
-                    <input type="text"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                    />
-                </div>
-                <br/>
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input type="text"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
-                </div>
-                <br/>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
-                </div>
-                <br/>
-                <div>
-                    <label htmlFor="hometown">Hometown</label>
-                    <input type="text"
-                        name="hometown"
-                        value={formData.hometown}
-                        onChange={handleChange}
-                    />
-                </div>
-                <br/>
-                <div>
-                    <label htmlFor="bio">Bio</label>
-                    <input type="text"
-                        name="bio"
-                        value={formData.bio}
-                        onChange={handleChange}
-                    />
-                </div>
-                <br/>
-                <div>
-                    <label htmlFor="avatar">Avatar</label>
-                    <input type="text"
-                        name="avatar"
-                        value={formData.avatar}
-                        onChange={handleChange}
-                    />
-                </div>
-                <br/>
-                <button type="submit">Update</button>
-            </form>
-        </div>
+        <>
+            <h1 className="all-h1">Update Account </h1>
+            <section className="all-form">
+                <form onSubmit={handleUpdate}>
+                        <label className="all-form-label" htmlFor="username">Username</label><br/>
+                        <input className="all-form-input" type="text"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                        />
+                    
+                    <br/>
+                        <label className="all-form-label" htmlFor="email">Email</label><br/>
+                        <input className="all-form-input" type="text"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                        />
+                   
+                    <br/>
+                        <label className="all-form-label" htmlFor="password">Password</label><br/>
+                        <input className="all-form-input" type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                        />
+                    
+                    <br/>
+                        <label className="all-form-label" htmlFor="hometown">Hometown</label><br/>
+                        <input className="all-form-input" type="text"
+                            name="hometown"
+                            value={formData.hometown}
+                            onChange={handleChange}
+                        />
+                    <br/>
+                        <label className="all-form-label" htmlFor="bio">Bio</label><br/>
+                        <input className="all-form-input" type="text"
+                            name="bio"
+                            value={formData.bio}
+                            onChange={handleChange}
+                        />
+                    <br/>
+                        <label className="all-form-label" htmlFor="avatar">Avatar</label><br/>
+                        <input className="all-form-input" type="text"
+                            name="avatar"
+                            value={formData.avatar}
+                            onChange={handleChange}
+                        />
+                    <br/>
+                    <button className="allform-button" type="submit">Update</button>
+                </form>
+            </section>
+        </>
     )
 }
 

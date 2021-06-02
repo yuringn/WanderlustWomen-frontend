@@ -49,34 +49,29 @@ function SignupForm({setCurrentUser}){
 
     return (
         <>
-        <h1 className="h1-signup">Signup</h1>
+        <h1 className="all-h1">Signup</h1>
         <p className="p-signup">Please fill in this form to create an account.</p>
         <section className="all-form">
             <form onSubmit={handleSubmit}>
-                <div>
                     <label className="all-form-label" htmlFor="username">User Name </label><br/>
-                        <input className="all-form-input"  type="text"
+                        <input className="all-form-input" type="text"
                             name="username"
                             value={formData.username}
                             onChange={handleChange}
                             placeholder="Enter Username"
                             required
                         />
-                </div>
                 <br/>
-                <div>
-                    <label className="label-login-signup"  htmlFor="email">Email </label><br/>
-                        <input className="all-form-input"  type="text"
+                    <label className="all-form-label" htmlFor="email">Email </label><br/>
+                        <input className="all-form-input" type="text"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="Enter Email"
                             required
                         />
-                </div>
                 <br/>
-                <div>
-                    <label className="label-login-signup"  htmlFor="psw">Password </label><br/>
+                    <label className="all-form-label"  htmlFor="psw">Password </label><br/>
                         <input className="all-form-input"  type="password"
                             name="password"
                             value={formData.password}
@@ -84,32 +79,26 @@ function SignupForm({setCurrentUser}){
                             placeholder="Enter Password"
                             required
                         />
-                </div>
                 <br/>
-                <div>
-                    <label className="label-login-signup"  htmlFor="hometown">Hometown </label><br/>
-                        <input className="all-form-input"  type="text"
+                    <label className="all-form-label" htmlFor="hometown">Hometown </label><br/>
+                        <input className="all-form-input" type="text"
                             name="hometown"
                             value={formData.hometown}
                             onChange={handleChange}
                             placeholder="Enter Hometown"
                             required
                         />
-                </div>
                 <br/>
-                <div>
-                    <label className="label-login-signup"  htmlFor="bio">Bio </label><br/>
-                        <input className="all-form-input"   type="text"
+                    <label className="all-form-label" htmlFor="bio">Bio </label><br/>
+                        <input className="all-form-input" type="text"
                             name="bio"
                             value={formData.bio}
                             onChange={handleChange}
                             placeholder="Enter Bio"
                             required
                         />
-                </div>
                 <br/>
-                <div>
-                    <label className="label-login-signup"  htmlFor="avatar">Avatar </label><br/>
+                    <label className="all-form-label"  htmlFor="avatar">Avatar </label><br/>
                         <input className="all-form-input"  type="text"
                             name="avatar"
                             value={formData.avatar}
@@ -117,11 +106,10 @@ function SignupForm({setCurrentUser}){
                             placeholder="Enter Avatar Url"
                             required
                         />
-                </div>
                 <br/>
                 {errors.map(error=><h3 style={{color:"black"}} key={error}>{error +" !"}</h3>)}
                 <br/>
-                <button className="button-login-signup"type="submit">Sign Up</button>
+                <button className="allform-button"type="submit">Sign Up</button>
             </form>
         </section>
         </>

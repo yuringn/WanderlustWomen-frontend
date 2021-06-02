@@ -181,21 +181,27 @@ function PostDetail({currentUser, deletePost}){
     )
     
     const {picture, title, country, visit_date, review, user_id} = post
-    const {posts_count, hometown, avatar, username} = userPostCount
+    const {posts_count, hometown, avatar, username, bio} = userPostCount
     
     return(
         <>
-            <div className = "post-details">
+            <div className = "post-details-container">
+                <div className="post-details">
                 <img src={picture} alt={country}/>
-                <h2>{title}</h2>
-                <h3>{country}</h3>
-                <h3>Date of visit: {visit_date}</h3>
-                <img className="avatar-in-postDetail"src={avatar} alt={username}/>
-                <h3>{username} </h3>
-                <span role="img" aria-label="hometown">🏡 {hometown}</span><br/>
-                <span role="img" aria-label="contributions"> ✍🏻 {posts_count} {posts_count > 1 ? "Contributions" : "Contribution" } </span>
-                <p>{review}</p>
-
+                <h2 className="post-details-info">{title}</h2>
+                <h3 className="post-details-info">Country: {country}</h3>
+                <h3 className="post-details-info">Date of visit: {visit_date}</h3>
+                </div>
+                <div className="userinfo">
+                    <img className="avatar-in-postDetail"src={avatar} alt={username}/>
+                    <h3 className="username-in-postDetail">{username} </h3>
+                    <span role="img" aria-label="hometown">🏡 {hometown}</span><br/>
+                    <span role="img" aria-label="bio">👩 {bio}</span><br/>
+                    <span role="img" aria-label="contributions"> ✍🏻 {posts_count} {posts_count > 1 ? "Contributions" : "Contribution" } </span>
+                </div>
+                <div className="review">
+                    <p>{review}</p>
+                </div>
                 <div className="likes-comments">
                     <button onClick={handleLike}>{currentLikes.length} {currentLikes.length > 1 ? "Likes" : "Like"}</button>
                     &nbsp;&nbsp;&nbsp;

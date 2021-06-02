@@ -27,9 +27,9 @@ function NavBar({currentUser, setCurrentUser}){
                   </NavLink>
                </li>
                <li className="nav-item">
-                  <NavLink className="nav-links" to ="/posts" >
-                     All Posts
-                  </NavLink>
+                     <NavLink className="nav-links" to ="/posts" >
+                        All Posts
+                     </NavLink>
                </li>
                <li className="nav-item">
                   <NavLink className="nav-links" to ="/new-post" >
@@ -46,17 +46,21 @@ function NavBar({currentUser, setCurrentUser}){
                         ):(
             <> 
             <ul className="nav-menu">
-            <li className="nav-item">
-               <NavLink className="nav-links" to ="/login" >
-                  Login
-               </NavLink>
-            </li>
-            <li className="nav-item">
-               <NavLink className="nav-links" to ="/signup" >
-                  Sign Up
-               </NavLink>
-            </li>
-
+               <li className="nav-item">
+                     <NavLink className="nav-links" to ="/posts" >
+                        All Posts
+                     </NavLink>
+               </li>
+               <li className="nav-item">
+                  <NavLink className="nav-links" to ="/login" >
+                     Login
+                  </NavLink>
+               </li>
+               <li className="nav-item">
+                  <NavLink className="nav-links" to ="/signup" >
+                     Sign Up
+                  </NavLink>
+               </li>
             </ul>
             </>
          )}

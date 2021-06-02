@@ -7,6 +7,7 @@ function NewPostForm({currentUser, addNewPost}){
     let month = ("0" + (todaysDate.getMonth() + 1)).slice(-2);  // MM
     let day = ("0" + todaysDate.getDate()).slice(-2);
     let maxDate = (year + "/" + month + "/" + day)
+
     const history = useHistory()
     const [formData, setFormData] = useState({
         user_id: currentUser.id,
@@ -39,7 +40,7 @@ function NewPostForm({currentUser, addNewPost}){
 
     return (
         <>
-         <h1 className="h1-write-post">Write a post</h1>
+         <h1 className="all-h1">Write a post</h1>
          <div className="all-form">
             <form onSubmit={handleSubmit}>
                 <div>
@@ -109,7 +110,7 @@ function NewPostForm({currentUser, addNewPost}){
                 </div>
                 <br/>
 
-                <button className="button-login-signup"type="submit">Submit</button>
+                <button className="allform-button"type="submit">Submit</button>
             </form>
         </div>
         </>

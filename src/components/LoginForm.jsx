@@ -50,11 +50,11 @@ function LoginForm ({ setCurrentUser }) {
 
     return (
         <>
-        <h1 className="h1-login">Login</h1>
+        <h1 className="all-h1">Login</h1>
         <section className="all-form">
             <form onSubmit={handleSubmit} className="login-box">
                 <div>
-                    <label className="label-login-signup" htmlFor="username">User Name </label>
+                    <label className="all-form-label" htmlFor="username">User Name </label>
                         <br/>
                         <input className="all-form-input" type="text"
                             name="username"
@@ -65,7 +65,7 @@ function LoginForm ({ setCurrentUser }) {
                 </div>
                 <br/>
                 <div>
-                    <label className="label-login-signup" htmlFor="psw">Password </label>
+                    <label className="all-form-label" htmlFor="psw">Password </label>
                     <br/>
                         <input className="all-form-input"  type="password"
                             name="password"
@@ -77,7 +77,7 @@ function LoginForm ({ setCurrentUser }) {
                 <br/>
                 {errors.map(error=><h3 style={{color:"black"}} key={error}>{error}</h3>)}
                 <br/>
-                <button className="button-login-signup"type="submit">Login</button>
+                <button className="allform-button"type="submit">Login</button>
             </form>
         </section>
         </>
