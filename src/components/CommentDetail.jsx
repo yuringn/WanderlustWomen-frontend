@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 
-function CommentDetail({currentUser, user_id, id, content, username, commentdate, editComment, deleteComment}){
+function CommentDetail({currentUser, user_id, id, content, username, user_avatar, commentdate, editComment, deleteComment}){
    
     const [newComment, setNewComment] = useState("")
     const [editCommentForm, setEditCommentForm] = useState(false)
@@ -32,16 +32,17 @@ function CommentDetail({currentUser, user_id, id, content, username, commentdate
     return (
         <>
             <div>
-            <p>{content} / <span>{username}</span> {commentdate} {user_id === currentUser.id ? (
-                    <>
-                        <span><button onClick = {handleEditCommentForm} className="updated-comment">{editCommentForm ? "Nevermind" : "Edit My Comment" }</button></span>
-                        <span><button onClick = {handleDelete}>Delete My Comment</button></span>
-                        
-                    </>
-                   
-                 ): null}
-            </p>
+                <img className="avatar-in-commentDetail"src={user_avatar} alt={username}/><span>{username}</span> {commentdate}
+                <p className="content">{content}   {user_id === currentUser.id ? (
+                        <>
+                            <span><button className="edit-btn-commentDetail" onClick = {handleEditCommentForm} className="updated-comment">{editCommentForm ? "Nevermind" : "Edit" }</button></span>
+                            <span><button className="delete-btn-commentDetail " onClick = {handleDelete}>Delete</button></span>
+                            
+                        </>
                     
+                    ): null}
+                </p>
+                        
             {/* </div>
 
             <div> */}
@@ -56,7 +57,7 @@ function CommentDetail({currentUser, user_id, id, content, username, commentdate
                             onChange={(e)=>setNewComment(e.target.value)}
                             required
                             />
-                        <button type="submit">{editCommentForm ? "Update" : null}</button>
+                        <button className="editdelete-btn-commentDetail" type="submit">{editCommentForm ? "Update" : null}</button>
                     </form>
                 ) : (null)
                 }

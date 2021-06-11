@@ -2,6 +2,7 @@ import React,{ useEffect, useState } from "react";
 import {useParams,useHistory} from 'react-router-dom'
 import CommentDetail from "./CommentDetail"
 import CommentForm from "./CommentForm";
+import EditPostForm from "./EditPostForm"
 
 function PostDetail({currentUser, deletePost}){
     const [post, setPost] = useState([])
@@ -11,14 +12,15 @@ function PostDetail({currentUser, deletePost}){
     const {id} = useParams()
     const history = useHistory()
     // const [showComments, setShowComments] = useState(false)
-    const [formData, setFormData] = useState({
-        user_id: currentUser.id,
-        country: "",
-        title: "",
-        visit_date: "",
-        review: "",
-        picture: ""
-    })
+
+    // const [formData, setFormData] = useState({
+    //     user_id: currentUser.id,
+    //     country: "",
+    //     title: "",
+    //     visit_date: "",
+    //     review: "",
+    //     picture: ""
+    // })
 
     useEffect(() => {
         fetch (`http://127.0.0.1:3003/posts/${id}`)
@@ -28,48 +30,48 @@ function PostDetail({currentUser, deletePost}){
                     setComments(post.comments)
                     setUserPostCount(post.user)
                     setCurrentLikes(post.likes) 
-                    setFormData(post)     
+                    // setFormData(post)     
         })
     },[id])
 
     
     // ---------- EDIT POST ---------- //
 
-    const editPost = (editPostObj) => {
-        console.log( editPostObj)
-        setPost(editPostObj)
-      }
+    // const editPost = (editPostObj) => {
+    //     console.log( editPostObj)
+    //     setPost(editPostObj)
+    //   }
 
-    const [editPostForm, setEditPostForm] = useState(false)
+    // const [editPostForm, setEditPostForm] = useState(false)
 
-    const handleEditPostForm = () => setEditPostForm(showForm=>!showForm)
+    const handleEditPostForm = () => history.push(`/posts/${id}/edit`)
 
-    const handleChange = (e) => {
-        const key = e.target.name
-        setFormData({...formData, 
-        [key]: e.target.value})
-    }
+    // const handleChange = (e) => {
+    //     const key = e.target.name
+    //     setFormData({...formData, 
+    //     [key]: e.target.value})
+    // }
 
-    const handleEditPost = (e) => {
-        e.preventDefault()
+    // const handleEditPost = (e) => {
+    //     e.preventDefault()
 
-        fetch(`http://127.0.0.1:3003/posts/${id}`,{
-            method:"PATCH",
-            headers: {"Content-type":"application/json"},
-            body: JSON.stringify(formData)
-        })
-        .then(r => r.json())
-        .then(post => { console.log(post)
-                        editPost(post)})
-        setEditPostForm(false)  
-    }
+    //     fetch(`http://127.0.0.1:3003/posts/${id}`,{
+    //         method:"PATCH",
+    //         headers: {"Content-type":"application/json"},
+    //         body: JSON.stringify(formData)
+    //     })
+    //     .then(r => r.json())
+    //     .then(post => { console.log(post)
+    //                     editPost(post)})
+    //     setEditPostForm(false)  
+    // }
     
     const handleDeletePost =()=>{
         fetch(`http://127.0.0.1:3003/posts/${id}`, {
             method:"DELETE"
         })
-        history.push("/posts")
         deletePost(id)
+        history.push("/posts")
     }
     // ---------- EDIT POST ---------- //
 
@@ -135,7 +137,7 @@ function PostDetail({currentUser, deletePost}){
 
     const handleLike = () => {
         let currentUserDidLike = currentLikes.filter(like => like.user_id === currentUser.id);
-        console.log("currentUserDidLike",currentUserDidLike[0])
+        console.log("currentUserDidLike",currentUserDidLike)
         if (currentUserDidLike[0] !== undefined) {
             let likeToBeRemoved = currentUserDidLike[0].id;
             console.log(likeToBeRemoved)
@@ -185,9 +187,95 @@ function PostDetail({currentUser, deletePost}){
     
     return(
         <>
+            {user_id === currentUser.id ?
+            <div className="edit-delete-container">
+                <i className="far fa-edit" onClick={handleEditPostForm}/>
+                <i className="fas fa-trash-alt" onClick={handleDeletePost}/>
+            </div> :null}
             <div className = "post-details-container">
                 <div className="post-details">
                 <img src={picture} alt={country}/>
+                <button className="like-btn"onClick={handleLike}>{currentLikes.length} {currentLikes.length > 1 ? "Likes" : "Like"}</button>
+                   
+                
+
+                {/* <div>
+                {editPostForm ? (
+                    <section className="all-form edit-post">
+                        <form onSubmit={handleEditPost}>
+                            <label className="all-form-label" htmlFor="country">Country: </label><br/>
+                            <select className="all-form-input"
+                                name="country"
+                                value={formData.country}
+                                onChange={handleChange}
+                            >   
+                                <option value="Select a Country">Select A Country</option>
+                                <option value="France">France</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Germany">Germany</option>
+                                <option value="Indonesia">Indonesia</option>
+                                <option value="Italy">Italy</option>
+                                <option value="Netherlands">Netherlands</option>
+                                <option value="Peru">Peru</option>
+                                <option value="Singapore">Singapore</option>
+                                <option value="Spain">Spain</option>
+                                <option value="Swiss">Swiss</option>
+                                <option value="USA">USA</option>
+                                <option value="Vietnam">Vietnam</option>
+                                
+                            </select>
+                    
+                        <br/>
+                        
+                            <label htmlFor="title">Title: </label><br/>
+                            <input className="all-form-input" type="text" 
+                                name="title"
+                                value={formData.title}
+                                onChange={handleChange}
+                                placeholder="Please include city or country in your title"
+                                required
+                            />
+                        
+                        <br/>
+                    
+                            <label htmlFor="visit_date">Visit Date: </label><br/>
+                            <input className="all-form-input" type="date"
+                                name="visit_date"
+                                value={formData.visit_date}
+                                min="01-01-2015" max ="12-31-2030"
+                                onChange={handleChange}
+                            />
+                    
+                        <br/>
+                        
+                            <label htmlFor="review">Review: </label><br/>
+                            <textarea className="all-form-input" type="text"
+                                name="review"
+                                value={formData.review}
+                                onChange={handleChange}
+                                required
+                            />
+                    
+                        <br/>
+                        
+                            <label htmlFor="picture">Picture: </label><br/>
+                            <input className="all-form-input" type="text"
+                                name="picture"
+                                value={formData.picture}
+                                onChange={handleChange}
+                                required
+                            />
+                        
+                        <br/>
+        
+                        <button className="allform-button" type="submit">Update Post</button>
+                    </form>
+                </section>
+                ): null}
+            </div> */}
+
+
+
                 <h2 className="post-details-info">{title}</h2>
                 <h3 className="post-details-info">Country: {country}</h3>
                 <h3 className="post-details-info">Date of visit: {visit_date}</h3>
@@ -199,19 +287,16 @@ function PostDetail({currentUser, deletePost}){
                     <span role="img" aria-label="bio">👩 {bio}</span><br/>
                     <span role="img" aria-label="contributions"> ✍🏻 {posts_count} {posts_count > 1 ? "Contributions" : "Contribution" } </span>
                 </div>
-                <div className="review">
+                <div className="review-in-postDetail">
                     <p>{review}</p>
                 </div>
-                <div className="likes-comments">
-                    <button onClick={handleLike}>{currentLikes.length} {currentLikes.length > 1 ? "Likes" : "Like"}</button>
-                    &nbsp;&nbsp;&nbsp;
+                <div className="likes-comments-container">
+                    {/* <button onClick={handleLike}>{currentLikes.length} {currentLikes.length > 1 ? "Likes" : "Like"}</button>
+                    &nbsp;&nbsp;&nbsp; */}
                     
-                    <button >
-                    {/* onClick={handleShowComments} */}
+                    {/* <button >
                         {comments.length} {comments.length > 1 ? "Comments" :  "Comment"}
-                    </button>
-                    {user_id === currentUser.id ? <button onClick={handleEditPostForm}>Edit Post</button> : null}
-                    {user_id === currentUser.id ? <button onClick={handleDeletePost}>Delete Post</button> : null}
+                    </button> */}
                     <CommentForm addNewComment={addNewComment} post={post} currentUser={currentUser} />
                     {renderComment}
                 </div>
@@ -221,78 +306,7 @@ function PostDetail({currentUser, deletePost}){
                 </div> */}
             </div>
 
-            <div>
-                {editPostForm ? (
-                    <form onSubmit={handleEditPost}>
-                    <div>
-                        <label htmlFor="country">Country: </label>
-                        <select 
-                            name="country"
-                            value={formData.country}
-                            onChange={handleChange}
-                        >   
-                            <option value="France">France</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value="Germany">Germany</option>
-                            <option value="Indonesia">Indonesia</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Netherlands">Netherlands</option>
-                            <option value="Peru">Peru</option>
-                            <option value="Singapore">Singapore</option>
-                            <option value="Spain">Spain</option>
-                            <option value="Swiss">Swiss</option>
-                            <option value="USA">USA</option>
-                            <option value="Vietnam">Vietnam</option>
-                            
-                        </select>
-                    </div>
-                    <br/>
-                    <div>
-                        <label htmlFor="title">Title: </label>
-                        <input type="text" 
-                            name="title"
-                            value={formData.title}
-                            onChange={handleChange}
-                            placeholder="Please include city or country in your title"
-                            required
-                        />
-                    </div>
-                    <br/>
-                     <div>
-                        <label htmlFor="visit_date">Visit Date: </label>
-                        <input type="date"
-                            name="visit_date"
-                            value={formData.visit_date}
-                            min="01-01-2015" max ="12-31-2030"
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <br/>
-                     <div>
-                        <label htmlFor="review">Review: </label>
-                        <input type="text"
-                            name="review"
-                            value={formData.review}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <br/>
-                     <div>
-                        <label htmlFor="picture">Picture: </label>
-                        <input type="text"
-                            name="picture"
-                            value={formData.picture}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <br/>
-    
-                    <button type="submit">Update Post</button>
-                </form>
-                ): null}
-            </div>
+            
         </>
     )
 }

@@ -19,18 +19,20 @@ function CommentForm({addNewComment, post, currentUser}){
     }
     return (
         <div className="comment-form">
-            <h3>Leave a Comment:</h3>
+            <h3 className="leave-comment">Leave a Comment:</h3>
             <form className="review-form" onSubmit={handleSubmit}>
-                <label htmlFor="comment">Comment: </label>
-                <input 
+                
+                <textarea className="comment-textarea"
+                
                 type="text" 
                 name="comment"
                 value={content}
                 onChange={(e)=>setContent(e.target.value)}
+                placeholder="Enter comment..."
                 required
                 />
-                <br/>
-                <button type="submit">Add Comment</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button className="edit-delete-btn add-comment"type="submit">Add Comment</button>
             </form>
         </div>
     )

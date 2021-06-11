@@ -11,11 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.about{
+  text-align: center;
+  margin-top: 50px;
+  width: 100%;
+  font-size: 18px;
+}
 
+.about h1{
+  font-family: 'Dancing Script', cursive;
+  margin-bottom: 15px;
+  color: #e7c7b7;
+  text-shadow: 0.3px 0.3px #e7c7b7;
+}
 .d-block{
   text-align: center;
   margin-left: 27rem;
-  padding: 100px;
+  padding: 60px;
   width: 40%
 }
 
@@ -259,7 +271,7 @@ code {
   font-weight: bold;
 }
 
-.button-login-signup:hover{
+.allform-button:hover{
   opacity: 0.7;
 }
 
@@ -333,6 +345,30 @@ div p {
 
 /******* POST DETAIL *******/
 
+.edit-delete-container{
+  position: relative;
+  margin-top: 20px ;
+  font-size: 30px;
+  color: #d1ac9b;
+}
+
+.fa-edit{
+  position: absolute;
+  top: 8px;
+  right: 100px;
+  font-size: 30px;
+}
+
+.fa-trash-alt{
+  position: absolute;
+  top: 8px;
+  right: 60px;
+}
+
+.fa-edit:hover, .fa-trash-alt:hover{
+  opacity: 0.6;
+}
+
 .post-details-container{
   display: block;
 }
@@ -350,7 +386,23 @@ div p {
   display: block;
   width: 25vw;
   height: 25vw;
-  margin: 50px auto;
+  margin: 50px auto 30px auto;
+}
+
+.like-btn{
+  background-color: #e7c7b7;
+  color: white;
+  /* padding: 14px 20px; */
+  /* margin: 8px 0; */
+  border: none;
+  cursor: pointer;
+  width: 10%;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.like-btn:hover{
+  opacity: 0.7;
 }
 
 .post-details-info{
@@ -358,7 +410,7 @@ div p {
   
 }
 .userinfo{
-  margin: 30px 20px;
+  margin: 50px 20px 0px;
   width: 30vw;
 }
 
@@ -379,10 +431,91 @@ div p {
 .username-in-postDetail{
   margin-left: 90px;
 }
-.review{
+.review-in-postDetail{
   width: 80%;
   padding-left: 30rem;
-  margin-top: -150px;
+  margin-top: -180px;
 }
 
+.likes-comments{
+  margin-top: 8rem;
+}
+
+.edit-delete-btn{
+  background-color: #e7c7b7;
+  color: white;
+  padding: 5px 15px;
+  margin: 0px 15px 10px;
+  border: none;
+  cursor: pointer;
+  
+  font-size: 16px;
+  font-weight: bold;
+}
+  
+.edit-delete-btn:hover{
+  opacity: 0.7;
+}
+
+.edit-post{
+  width:100%
+}
+
+.likes-comments-container{
+  margin: 50px 30px;
+}
+
+h3.leave-comment{
+  margin-bottom: 20px;
+}
+.comment-textarea{
+  height: 100px;
+  width: 200px;
+}
+
+.edit-btn-commentDetail, .updated-comment{
+  background-color: #e7c7b7;
+  color: white;
+  padding: 3px 10px;
+  margin: 0px 10px;
+  border: none;
+  cursor: pointer;
+  width: 9%;
+  font-size: 16px;
+  font-weight: bold;
+
+}
+
+.edit-btn-commentDetail:hover, .delete-btn-commentDetail:hover, .updated-comment:hover{
+
+    opacity: 0.7;
+  
+}
+
+.delete-btn-commentDetail{
+  color: white;
+  padding: 3px 10px;
+  margin: 0px 10px;
+  border: none;
+  cursor: pointer;
+  width: 9%;
+  font-size: 16px;
+  font-weight: bold;
+  background-color:rgb(160, 100, 100);
+}
 /******* POST DETAIL *******/
+
+.avatar-in-commentDetail{
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+p.content {
+  margin-left: 30px;
+  font-style: italic;
+}

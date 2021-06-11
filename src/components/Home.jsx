@@ -2,6 +2,11 @@ import React from "react"
 import Carousel from 'react-bootstrap/Carousel';
 function Home(){
     return (
+        <>
+        <div className ="about">
+            <h1>Wanderlust Women</h1>
+            <p>We are women and we love to travel. We come from all ages, backgrounds, and walks of life and we are united by our passion for new experiences in the world.</p>
+        </div>
         <Carousel>
         <Carousel.Item interval={1000}>
           <img
@@ -33,12 +38,13 @@ function Home(){
             alt="Third slide"
           />
       
-          <Carousel.Caption>
+          {/* <Carousel.Caption>
             <h3>Third slide label</h3>
             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          </Carousel.Caption>
+          </Carousel.Caption> */}
         </Carousel.Item>
       </Carousel>
+      </>
     )
 }
 

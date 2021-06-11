@@ -10,6 +10,7 @@ import PostsContainer from "./PostsContainer"
 import PostDetail from "./PostDetail"
 import Profile from "./Profile"
 import UpdateProfileForm from "./UpdateProfileForm";
+import EditPostForm from "./EditPostForm"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
@@ -55,7 +56,13 @@ function App() {
   // }
 
   const deletePost = (postId) => {
-    const removePost = allPosts.filter(post => post.id!==postId)
+    console.log("postID", postId)
+    const removePost = allPosts.filter(post => {
+
+      console.log("post.id", post.id)
+      return post.id !== postId
+    })
+    console.log("remove",removePost)
     setAllPosts(removePost)
   }
 // ----------  ADD/ DELETE NEW POST ----------  //
@@ -85,7 +92,7 @@ function App() {
         </Route>
 
         <Route exact path="/posts">
-          {allPosts.length > 0 && <PostsContainer allPosts={allPosts} currentUser={currentUser} /> } 
+          <PostsContainer currentUser={currentUser} /> 
         </Route>
 
         <Route exact path="/posts/:id">
@@ -93,6 +100,11 @@ function App() {
           // editPost={editPost} 
           deletePost={deletePost}
           /> }
+        </Route>
+
+
+        <Route exact path="/posts/:id/edit">
+          {currentUser && <EditPostForm currentUser={currentUser}/>}
         </Route>
         
         <Route exact path="/new-post">

@@ -43,7 +43,6 @@ function NewPostForm({currentUser, addNewPost}){
          <h1 className="all-h1">Write a post</h1>
          <div className="all-form">
             <form onSubmit={handleSubmit}>
-                <div>
                     <label htmlFor="country">Country: </label><br/>
                     <select className="all-form-input"
                         name="country"
@@ -64,9 +63,8 @@ function NewPostForm({currentUser, addNewPost}){
                         <option value="USA">USA</option>
                         <option value="Vietnam">Vietnam</option>  
                     </select>
-                </div>
                 <br/>
-                <div>
+                
                     <label htmlFor="title">Title: </label><br/>
                     <input className="all-form-input" type="text" 
                         name="title"
@@ -75,9 +73,9 @@ function NewPostForm({currentUser, addNewPost}){
                         placeholder="Please include city or country in your title"
                         required
                     />
-                </div>
+               
                 <br/>
-                 <div>
+                 
                     <label htmlFor="visit_date">Visit Date: </label><br/>
                     <input className="all-form-input" type="date"
                         name="visit_date"
@@ -85,9 +83,9 @@ function NewPostForm({currentUser, addNewPost}){
                         min="01-01-2015" max = {maxDate}
                         onChange={handleChange}
                     />
-                </div>
+                
                 <br/>
-                 <div>
+                
                     <label htmlFor="review">Review: </label><br/>
                     <textarea className="all-form-input review" type="text"
                         name="review"
@@ -96,9 +94,9 @@ function NewPostForm({currentUser, addNewPost}){
                         placeholder="Write something..."
                         required
                     />
-                </div>
+                
                 <br/>
-                 <div>
+                
                     <label htmlFor="picture">Picture: </label><br/>
                     <input className="all-form-input" type="text"
                         name="picture"
@@ -107,7 +105,7 @@ function NewPostForm({currentUser, addNewPost}){
                         placeholder="Enter Picture Url"
                         required
                     />
-                </div>
+            
                 <br/>
 
                 <button className="allform-button"type="submit">Submit</button>

@@ -22,7 +22,7 @@ function Profile({currentUser}){
                 <div className="middle">
                     <img className="profile-image"src ={currentUser.avatar} alt={currentUser.username}/>
                     <h1 className ="user-name">{currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1)}</h1>
-                    <p>Total contributions: {currentUser.posts_count} posts</p>
+                    {/* <p>Total contributions: {currentUser.posts_count} posts</p> */}
                     <p>Username: {currentUser.username}</p>
                     <p>Email: {currentUser.email}</p>
                     <p>Hometown: {currentUser.hometown}</p>
